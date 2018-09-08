@@ -3,30 +3,48 @@ using UnityEngine.UI;
 
 public class FilterButtonManager : MonoBehaviour
 {
+    public float animSpeed = 100f;
+    public float swipeDistance = 207.75f;
     public Button[] buttons;
+    public Image[] arrows;
 
     [HideInInspector]
     public int buttonPressed;
 
-    int activeButton = 0;
+    private int activeButton = 0;
 
-    const float SWIPE_DISTANCE = 187.5f;
+    private Swipe swipe;
+
+    private Vector3 desiredPosition;
+
+    private bool moving;
 
     private void Awake()
     {
+        swipe = GetComponent<Swipe>();
+        desiredPosition = transform.position;
         InitButtons();
+        arrows[1].gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (swipe.SwipeDown)
         {
+            Debugger.d_Message("down pressed");
             OnSwipeDown();
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (swipe.SwipeUp)
         {
+            Debugger.d_Message("up pressed");
             OnSwipeUp();
+        }
+
+        //transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * animSpeed);
+        if (transform.position == desiredPosition)
+        {
+            moving = false;
         }
     }
 
@@ -36,38 +54,47 @@ public class FilterButtonManager : MonoBehaviour
         {
             if (activeButton != i)
             {
-                buttons[i].enabled = false;
+                buttons[i].gameObject.SetActive(false);
             }
         }
     }
 
     void OnSwipeDown()
     {
-        if (activeButton != 0)
+        if (activeButton != buttons.Length - 1)
         {
-            transform.position += new Vector3(0, SWIPE_DISTANCE, 0);
-            buttons[activeButton].enabled = false;
-            activeButton -= 1;
-            buttons[activeButton].enabled = true;
-        }
-        else
-        {
-            Debugger.d_Message("end");
+
+            //desiredPosition = new Vector3(transform.position.x, transform.position.y - SWIPE_DISTANCE, transform.position.z);
+            transform.position -= new Vector3(0, swipeDistance, 0);
+            moving = true;
+            buttons[activeButton].gameObject.SetActive(false);
+            activeButton += 1;
+            buttons[activeButton].gameObject.SetActive(true);
+            arrows[0].gameObject.SetActive(true);
+            arrows[1].gameObject.SetActive(true);
+            if (activeButton == buttons.Length - 1)
+            {
+                arrows[0].gameObject.SetActive(false);
+            }
         }
     }
 
     void OnSwipeUp()
     {
-        if (activeButton != buttons.Length)
+        if (activeButton != 0)
         {
-            transform.position -= new Vector3(0, SWIPE_DISTANCE, 0);
-            buttons[activeButton].enabled = false;
-            activeButton += 1;
-            buttons[activeButton].enabled = true;
-        }
-        else
-        {
-            Debugger.d_Message("start");
+            //desiredPosition = new Vector3(transform.position.x, transform.position.y + SWIPE_DISTANCE, transform.position.z);
+            transform.position += new Vector3(0, swipeDistance, 0);
+            moving = true;
+            buttons[activeButton].gameObject.SetActive(false);
+            activeButton -= 1;
+            buttons[activeButton].gameObject.SetActive(true);
+            arrows[0].gameObject.SetActive(true);
+            arrows[1].gameObject.SetActive(true);
+            if (activeButton == 0)
+            {
+                arrows[1].gameObject.SetActive(false);
+            }
         }
     }
 

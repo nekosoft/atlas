@@ -56,7 +56,7 @@ public class GyroCamera : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 1000f))
+        if (Physics.Raycast(ray, out hit, 500f))
         {
             Vector3 rayHit = hit.point;
 

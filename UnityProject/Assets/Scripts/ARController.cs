@@ -6,33 +6,35 @@ using UnityEngine.SceneManagement;
 
 public class ARController : MonoBehaviour
 {
-    public GameObject world;
-    public Image wikiPage;
+    public GameObject[] distances;
+    public FilterButtonManager filters;
 
-    bool wikiOn;
-
-    private void Start()
+    private void Update()
     {
-        wikiPage.gameObject.SetActive(false);
+       for (int i = 0; i < distances.Length; i++)
+        {
+            if (distances[i])
+            {
+                if (filters.activeButton == 0)
+                {
+                    distances[i].SetActive(true);
+                    continue;
+                }
+
+                if (i == filters.activeButton)
+                {
+                    distances[filters.activeButton].SetActive(true);
+                }
+                else
+                {
+                    distances[i].SetActive(false);
+                }
+            }
+        }
     }
 
     public void OnBackPress()
     {
-        if (wikiOn)
-        {
-            wikiPage.gameObject.SetActive(false);
-            world.SetActive(true);
-        }
-        else
-        {
-            SceneManager.LoadScene("Map");
-        }
-    }
-
-    public void OnWikiPress()
-    {
-        wikiPage.gameObject.SetActive(true);
-        world.SetActive(false);
-        wikiOn = true;
+        SceneManager.LoadScene("Map");
     }
 }

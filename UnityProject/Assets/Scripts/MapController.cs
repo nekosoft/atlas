@@ -4,21 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class MapController : MonoBehaviour
 {
+    public Sprite[] mapImages;
+
     [SerializeField]
     private FilterButtonManager filterButtonManager;
     [SerializeField]
     private Image currentMapImage;
-    [SerializeField]
-    private Image[] mapImages;
 
     private void Start()
     {
-        mapImages = new Image[filterButtonManager.buttons.Length];
     }
 
     private void Update()
     {
-        //UpdateMapImage(filterButtonManager.activeButton);
+        UpdateMapImage(filterButtonManager.activeButton);
     }
 
     // Take the user to the AR scene
@@ -30,6 +29,6 @@ public class MapController : MonoBehaviour
     // Update map to selected filter
     void UpdateMapImage(int newImageIndex)
     {
-        currentMapImage = mapImages[newImageIndex];
+        currentMapImage.sprite = mapImages[newImageIndex];
     }
 }

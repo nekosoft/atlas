@@ -201,6 +201,7 @@ MonoBehaviour:
   wikiButton: {fileID: 114853128443268094}
   backButton: {fileID: 114235100911338436}
   exteriorObj: {fileID: 0}
+  wikis: []
 --- !u!114 &114839366856209318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,7 +221,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9609149a54d3233498d603f09fdb637a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

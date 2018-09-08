@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class LanguageManager : MonoBehaviour
 {
-    public Image page;
+    public Image languagePage;
     public Button languageButton;
     public Button backButton;
 
@@ -13,7 +11,7 @@ public class LanguageManager : MonoBehaviour
     
     public void OnLanguagePress()
     {
-        page.gameObject.SetActive(true);
+        languagePage.gameObject.SetActive(true);
         backButton.gameObject.SetActive(true);
         if (exteriorObj)
             exteriorObj.SetActive(false);
@@ -21,7 +19,7 @@ public class LanguageManager : MonoBehaviour
 
     public void OnBackPress()
     {
-        page.gameObject.SetActive(false);
+        languagePage.gameObject.SetActive(false);
         backButton.gameObject.SetActive(false);
         if (exteriorObj)
             exteriorObj.SetActive(true);

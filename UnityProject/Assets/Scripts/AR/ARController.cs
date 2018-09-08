@@ -1,17 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ARController : MonoBehaviour
 {
     public GameObject[] distances;
     public FilterButtonManager filters;
+    public WikiManager wikiManager;
+    public LanguageManager languageManager;
 
     private void Update()
     {
-       for (int i = 0; i < distances.Length; i++)
+        if (!wikiManager.wikiPage.IsActive() || !languageManager.languagePage)
+        for (int i = 0; i < distances.Length; i++)
         {
             if (distances[i])
             {

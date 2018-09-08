@@ -9,6 +9,22 @@ public class WikiManager : MonoBehaviour
 
     public GameObject exteriorObj;
 
+    public Sprite[] wikis;
+
+    int wikiInd = 1;
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && wikiPage.gameObject.activeSelf)
+        {
+            if (wikiInd < wikis.Length)
+            {
+                wikiPage.sprite = wikis[wikiInd];
+                wikiInd++;
+            }
+        }
+    }
+
     public void OnWikiPress()
     {
         wikiPage.gameObject.SetActive(true);
@@ -23,5 +39,6 @@ public class WikiManager : MonoBehaviour
         backButton.gameObject.SetActive(false);
         if (exteriorObj)
             exteriorObj.SetActive(true);
+        wikiInd = 1;
     }
 }

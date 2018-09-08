@@ -11,7 +11,8 @@ public class FilterButtonManager : MonoBehaviour
     [HideInInspector]
     public int buttonPressed;
 
-    private int activeButton = 0;
+    [HideInInspector]
+    public int activeButton = 0;
 
     private Swipe swipe;
 
@@ -102,8 +103,10 @@ public class FilterButtonManager : MonoBehaviour
     {
         buttonPressed = num;
 
+        Debugger.d_Message(num.ToString());
+
         string name = "";
-        switch (num)
+        switch (buttonPressed)
         {
             case 0:
                 name = "All";

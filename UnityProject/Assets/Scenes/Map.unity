@@ -382,6 +382,11 @@ Prefab:
       propertyPath: arrows.Array.data[1]
       value: 
       objectReference: {fileID: 1725619080}
+    - target: {fileID: 114554621976174378, guid: 5b7cdbb825c43a24fb508a3e56408da6,
+        type: 2}
+      propertyPath: swipeDistance
+      value: 375
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b7cdbb825c43a24fb508a3e56408da6, type: 2}
   m_IsPrefabParent: 0

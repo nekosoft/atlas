@@ -18,7 +18,7 @@ public class MapController : MonoBehaviour
 
     private void Update()
     {
-        //UpdateMapImage(filterButtonManager.buttonPressed);
+        //UpdateMapImage(filterButtonManager.activeButton);
     }
 
     // Take the user to the AR scene

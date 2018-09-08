@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ARButtonManager : MonoBehaviour
+public class ARController : MonoBehaviour
 {
     public void OnBackPress()
     {

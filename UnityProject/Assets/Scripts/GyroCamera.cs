@@ -13,6 +13,9 @@ public class GyroCamera : MonoBehaviour
     private Transform worldObj;
     private float startY;
 
+    [SerializeField]
+    private Transform zoomObj;
+
 
     void Start()
     {
@@ -28,23 +31,42 @@ public class GyroCamera : MonoBehaviour
             gyro.enabled = true;
 
             camParent.transform.rotation = Quaternion.Euler(90f, 180f, 0f);
-            rotFix = new Quaternion(0, 0, 1, 0);
+            rotFix = new Quaternion(0f, 0f, 1f, 0f);
         }
     }
 
     private void Update()
     {
-        if (gyroSupported && startY == 0)
+        if (gyroSupported)
         {
-            ResetGyro();
-        }
+            if (startY == 0)
+            {
+                ResetGyro();
+            }
 
-        transform.rotation = gyro.attitude * rotFix;
+            transform.localRotation = gyro.attitude * rotFix;
+        }
     }
 
-    void ResetGyro()
+    public void ResetGyro()
     {
+        int x = Screen.width / 2;
+        int y = Screen.height / 2;
+
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(x, y));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1000f))
+        {
+            Vector3 rayHit = hit.point;
+
+            rayHit.y = 0;
+
+            float z = Vector3.Distance(Vector3.zero, rayHit);
+            zoomObj.localPosition = new Vector3(0f, zoomObj.localPosition.y, Mathf.Clamp(z, 2f, 10f));
+        }
+
         startY = transform.eulerAngles.y;
-        worldObj.rotation = Quaternion.Euler(0, startY, 0);
+        worldObj.rotation = Quaternion.Euler(0f, startY, 0f);
     }
 }

@@ -8,6 +8,9 @@ public class ARController : MonoBehaviour
     public WikiManager wikiManager;
     public LanguageManager languageManager;
 
+    public GameObject wikiObj;
+    public GameObject transportObj;
+
     private void Update()
     {
         if (!wikiManager.wikiPage.IsActive() || !languageManager.languagePage)
@@ -36,5 +39,19 @@ public class ARController : MonoBehaviour
     public void OnBackPress()
     {
         SceneManager.LoadScene("Map");
+    }
+
+    public void OnTreePress()
+    {
+        if (wikiObj.activeSelf && transportObj.activeSelf)
+        {
+            wikiObj.SetActive(false);
+            transportObj.SetActive(false);
+        }
+        else
+        {
+            wikiObj.SetActive(true);
+            transportObj.SetActive(true);
+        }
     }
 }
